@@ -16,10 +16,14 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
+import Pages.AuthPage;
+import Pages.CartSummaryPage;
 import Pages.LocationPopupPage;
 import Pages.LoginPage;
+import Pages.MealPage;
 import Pages.NotificationSistemPage;
 import Pages.ProfilePage;
+import Pages.SearchResultPage;
 
 public abstract class BasicTest {
 
@@ -33,9 +37,10 @@ public abstract class BasicTest {
 	protected LoginPage loginPage;
 	protected NotificationSistemPage notificationSistemPage;
 	protected ProfilePage profilePage;
-
-
-	
+	protected AuthPage authPage;
+	protected MealPage mealPage;
+	protected CartSummaryPage cartSummaryPage;
+	protected SearchResultPage searhResultPage;
 
 	@BeforeClass
 	public void setup() {
@@ -47,22 +52,26 @@ public abstract class BasicTest {
 		this.loginPage = new LoginPage(driver, js, waiter);
 		this.notificationSistemPage = new NotificationSistemPage(driver, js, waiter);
 		this.profilePage = new ProfilePage(driver, js, waiter);
+		this.authPage = new AuthPage(driver, js, waiter);
+		this.mealPage = new MealPage(driver, js, waiter);
+		this.cartSummaryPage = new CartSummaryPage(driver, js, waiter);
+		this.searhResultPage = new SearchResultPage(driver, js, waiter);
 		this.driver.manage().window().maximize();
 		this.driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
 		this.driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
 
-//	@AfterClass
-//	public void clean() {
-//		this.driver.quit();
-//	}
-	
+	@AfterClass
+	public void clean() {
+		this.driver.quit();
+	}
+
 	@AfterMethod
 	public void ifTestFail(ITestResult result) throws IOException {
 		if (result.getStatus() == ITestResult.FAILURE) {
 			File src = ((TakesScreenshot) this.driver).getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(src,
-					new File("C:\\Users\\Baja\\Desktop\\Itbootcamp\\Zavrsni projekat\\FinalProject\\screenshots\\screenshot.png"));
+			FileUtils.copyFile(src, new File(
+					"C:\\Users\\Baja\\Desktop\\Itbootcamp\\Zavrsni projekat\\FinalProject\\screenshots\\screenshot.png"));
 		}
 		driver.manage().deleteAllCookies();
 	}

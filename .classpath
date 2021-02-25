@@ -31,7 +31,7 @@
 	<classpathentry kind="lib" path="lib/content.jar"/>
 	<classpathentry kind="lib" path="lib/org.apache-extras.beanshell.bsh_2.0.0.b6.jar"/>
 	<classpathentry kind="lib" path="lib/org.apache-extras.beanshell.bsh.source_2.0.0.b6.jar"/>
-	<classpathentry kind="lib" path="lib/org.testng_7.0.0.r201908191551.jar"/>
+	<classpathentry kind="lib" path="lib/org.testng_7.0.0.r201908191551.jar" sourcepath="lib/org.testng_7.0.0.r201908191551.jar"/>
 	<classpathentry kind="lib" path="lib/org.testng.eclipse_7.0.0.201908240652.jar"/>
 	<classpathentry kind="lib" path="lib/org.testng.eclipse.maven_7.0.0.201908240652.jar"/>
 	<classpathentry kind="lib" path="lib/org.testng.eclipse.maven.feature_7.0.0.201908240652.jar"/>
