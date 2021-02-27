@@ -9,21 +9,23 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class NotificationSistemPage extends BasicPage {
-	
+
 	public NotificationSistemPage(WebDriver driver, JavascriptExecutor js, WebDriverWait waiter) {
 		super(driver, js, waiter);
 	}
-	
+
 	public WebElement getMessage() {
-		return this.driver.findElement(By.xpath("//*[contains(@class, 'alert--success') or contains(@class, 'alert--danger')][contains(@style,'display: block')]"));
+		return this.driver.findElement(By.xpath(
+				"//*[contains(@class, 'alert--success') or contains(@class, 'alert--danger')][contains(@style,'display: block')]"));
 	}
 
 	public String getMessageText() {
 		String message = this.getMessage().getText();
 		return message;
 	}
-	
+
 	public void waitMessageToDisappear() {
-		this.waiter.until(ExpectedConditions.attributeToBe(By.xpath("//*[contains(@class, 'system_message')]"), "style", "display: none;"));
+		this.waiter.until(ExpectedConditions.attributeToBe(By.xpath("//*[contains(@class, 'system_message')]"), "style",
+				"display: none;"));
 	}
 }

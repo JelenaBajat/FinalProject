@@ -13,16 +13,16 @@ public class LocationPopupPage extends BasicPage {
 		super(driver, js, waiter);
 	}
 
-	public WebElement getSelectLocation() {
-		return this.driver.findElement(By.id("locality_keyword"));
+	public WebElement getPopUpSelectLocation() {
+		return this.driver.findElement(By.xpath("//div[@class='location-selector']/a"));
 	}
 
 	public WebElement getClose() {
-		return this.driver.findElement(By.xpath("//*[@id=\"location-popup\"]/div/div/div/div/a"));
+		return this.driver.findElement(By.className("close-btn-white"));
 	}
 
 	public WebElement getKeyword() {
-		return this.driver.findElement(By.xpath("//*[@id='locality_keyword']"));
+		return this.driver.findElement(By.id("locality_keyword"));
 	}
 
 	public WebElement getLocationItem(String locationName) {
@@ -30,15 +30,15 @@ public class LocationPopupPage extends BasicPage {
 	}
 
 	public WebElement getLocationInput() {
-		return this.driver.findElement(By.xpath("//*[@id='location_id']"));
+		return this.driver.findElement(By.id("location_id"));
 	}
 
 	public WebElement getSubmit() {
-		return this.driver.findElement(By.xpath("//*[@name='btn_submit']"));
+		return this.driver.findElement(By.name("btn_submit"));
 	}
 
-	public WebElement PopUpSelectLocation() {
-		return this.driver.findElement(By.linkText("Select Location"));
+	public void PopUpSelectLocation() {
+		this.getPopUpSelectLocation().click();
 	}
 
 	public void setLocation(String locationName) {

@@ -20,12 +20,12 @@ public class AuthPage extends BasicPage {
 		return this.driver.findElement(By.linkText("My Account"));
 	}
 
-	public WebElement getlogout() {
+	public WebElement getLogout() {
 		return this.driver.findElement(By.linkText("Logout"));
 	}
 
 	public void logoutMember() {
 		this.getMember().click();
-		this.getlogout().click();
+		this.getLogout().click();
 	}
 }

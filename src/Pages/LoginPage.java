@@ -32,18 +32,6 @@ public class LoginPage extends BasicPage {
 		return this.driver.findElement(By.name("btn_submit"));
 	}
 
-	public WebElement getFacebookLogin() {
-		return this.driver.findElement(By.linkText("FACEBOOK"));
-	}
-
-	public WebElement getGoogleLogin() {
-		return this.driver.findElement(By.linkText("GOOGLE"));
-	}
-
-	public WebElement getSignUpNow() {
-		return this.driver.findElement(By.linkText("Signup Now"));
-	}
-
 	public void loginMember(String email, String password) {
 		this.getEmail().clear();
 		this.getPassword().clear();

@@ -2,6 +2,9 @@ package Tests;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -40,14 +43,16 @@ public abstract class BasicTest {
 	protected AuthPage authPage;
 	protected MealPage mealPage;
 	protected CartSummaryPage cartSummaryPage;
-	protected SearchResultPage searhResultPage;
+	protected SearchResultPage searchResultPage;
 
 	@BeforeClass
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "driver-lib\\chromedriver.exe");
+		
 		this.driver = new ChromeDriver();
 		this.js = (JavascriptExecutor) driver;
 		this.waiter = new WebDriverWait(driver, 10);
+		
 		this.locationPopupPage = new LocationPopupPage(driver, js, waiter);
 		this.loginPage = new LoginPage(driver, js, waiter);
 		this.notificationSistemPage = new NotificationSistemPage(driver, js, waiter);
@@ -55,7 +60,8 @@ public abstract class BasicTest {
 		this.authPage = new AuthPage(driver, js, waiter);
 		this.mealPage = new MealPage(driver, js, waiter);
 		this.cartSummaryPage = new CartSummaryPage(driver, js, waiter);
-		this.searhResultPage = new SearchResultPage(driver, js, waiter);
+		this.searchResultPage = new SearchResultPage(driver, js, waiter);
+		
 		this.driver.manage().window().maximize();
 		this.driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
 		this.driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -67,11 +73,12 @@ public abstract class BasicTest {
 	}
 
 	@AfterMethod
-	public void ifTestFail(ITestResult result) throws IOException {
+	public void ifTestFail(ITestResult result) throws IOException {	
 		if (result.getStatus() == ITestResult.FAILURE) {
+			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh-mm-ss");
+			Date date = new Date();
 			File src = ((TakesScreenshot) this.driver).getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(src, new File(
-					"C:\\Users\\Baja\\Desktop\\Itbootcamp\\Zavrsni projekat\\FinalProject\\screenshots\\screenshot.png"));
+			FileUtils.copyFile(src, new File("screenshots/" + dateFormat.format(date) + ".png"));
 		}
 		driver.manage().deleteAllCookies();
 	}

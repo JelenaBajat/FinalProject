@@ -1,5 +1,8 @@
 package Pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,8 +15,21 @@ public class SearchResultPage extends BasicPage {
 		super(driver, js, waiter);
 	}
 
-	public WebElement getSearchResult() {
-		return this.driver.findElement(By.xpath("//*[@class='product-name']/a"));
+	public List<WebElement> getListOfProducts() {
+		return this.driver.findElements(By.xpath("//*[@class='product-name']/a"));
 	}
 
+	public List<String> getListOfProductsText(){
+		ArrayList<String> listOfProductText = new ArrayList<String>();
+		
+		for (int i = 0; i < this.getListOfProducts().size(); i++) {
+			 String productName = this.getListOfProducts().get(i).getText();
+			 listOfProductText.add(productName);
+		}
+		 return listOfProductText;
+	}
+	
+	public double getNumberOfResults() {
+		return this.getListOfProducts().size();
+	}
 }
